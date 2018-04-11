@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Class11AEnglishLesson extends Model
 {
     // изменяет имя таблицы по умолчанию
-    protected $table = 'class_11_a_english_lessons'; 
+    // protected $table = 'class_11_a_english_lessons'; 
 
     // Отключает запис о последних изменених
     public $timestamps = false;

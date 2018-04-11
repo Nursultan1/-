@@ -11,17 +11,22 @@
 |
 */
 Route::get('/', 'ClassController@index');
-Route::get('/test', function () {
-    $classe = new Classe;
-    // for(){
-    //     for(){
 
-    //     }
-    // }
-    $test= App\Classe::all();
-    dd($test);
-    return view('test', compact('test'));
+// Route::get('/test', function () {
+//     $classe = new Classe;
+//     $test= App\Classe::all();
+//     dd($test);
+//     return view('test', compact('test'));
+// });
+Route::get('/t', function(){
+    $te=App\Class11AEnglishLesson::all();
+    return "vfdsvfd";
 });
+Route::get('/test', 'TestController@index');
+Route::get('/add', 'TestController@add')->name('add');
+Route::get('/edit{name}', 'TestController@edit')->name('edit');
+Route::any('/save', 'TestController@save')->name('save');
+Route::get('/delete/{name}', 'TestController@delete')->name('delete');
 
 Auth::routes();
 

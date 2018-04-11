@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/modal.css">
 @endsection
 @section('content')
-    <div class="wrapper">
         <header>
             <div class="titel">
                 <h1>Электронный журнал</h1>                      
@@ -28,100 +27,19 @@
         </header>
         <div class="content">
             <div class="klassy">
-                <div class="klass">
-                    <h3>1-класс</h3>
-                    <ul>
-                        <li v-on:click="showHideModal=true" >1_а_класс</a></li>
-                        <li >1_б_класс</li>
-                        <li >1_в_класс</li>
-                    </ul>
-                </div>
-                <div class="klass">  
-                    <h3>2-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>
-                </div>
-                <div class="klass">
-                    <h3>3-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>4-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>5-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>6-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>7-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>8-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>9-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>10-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
-                <div class="klass">
-                    <h3>11-класс</h3>
-                    <ul>
-                        <li>1_а_класс</li>
-                        <li>1_б_класс</li>
-                        <li>1_в_класс</li>
-                    </ul>  
-                </div>
+            <?php $class=1?>
+                @foreach ($classList as $list)
+                    <div class="klass">
+                    <h3><?php echo $class; $class++?>-класс</h3>
+                        <ul>
+                            @foreach ($list as $Item)
+                               <li v-on:click="showHideModal=true">{{$Item->class_name_numbe}}_{{$Item->class_name_categori}}_класс</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach
             </div>
         </div>
-        <footer>
-            <h4> © 2016г ПКМУК | Все права защищены.</h4>
-        </footer>
-    </div>
     <!-- Модальное окно -->
     <div id='win' v-if="showHideModal">
         <div class="modalU"></div>
