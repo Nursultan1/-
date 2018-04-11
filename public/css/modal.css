@@ -1,0 +1,41 @@
+#app{
+	width: 100%;
+	height: 100%;
+}
+#win{
+}
+.modalU{
+    background: #000;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 100;
+	opacity: .5;
+	width: 100%;
+	height: 100%;
+}
+.modal-okno{
+    background: #fff;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	z-index: 5000;
+    width: 500px;
+    height: 400px;
+	padding: 0px;
+	margin-left: -250px;
+}
+.modal-okno .header-modal{
+	width: 100%;
+	height: 50px;
+	background: rgb(21, 31, 165)
+}
+.modal-okno  .header-modal img{
+	margin-top: 8px;
+    margin-left: 92%;
+    width: 30px;
+    height: 30px;
+}

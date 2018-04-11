@@ -10,7 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'ClassController@index');
+Route::get('/test', function () {
+    $classe = new Classe;
+    // for(){
+    //     for(){
 
-Route::get('/', function () {
-    return view('welcome');
+    //     }
+    // }
+    $test= App\Classe::all();
+    dd($test);
+    return view('test', compact('test'));
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

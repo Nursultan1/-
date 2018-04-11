@@ -1,0 +1,118 @@
+@font-face {
+	font-family: 'OpenSans';
+	src: url("../fonts/OpenSans.ttf");
+}
+body{
+    padding: 0px;
+    margin: 0px;
+    background: #eeeeee;
+
+}
+header{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    background: white;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.12);
+}
+header .titel{
+    width: 80%;
+    height: 100%;
+}
+header .titel h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 45px;
+    font-weight: 500;
+    padding-left: 20px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+header .titel .line-blok{
+    /* background: forestgreen; */
+}
+header .titel .line-blok .line1{
+    border: none;
+    background-color: bisque;
+    height: 5px;
+    width: 80%;
+    margin-left: 0px;
+
+}
+header .titel .line-blok .line2{
+    border: none;
+    background-color: dodgerblue;
+    height: 5px;
+
+}
+
+header .profil{
+    height: 100%;
+    width: 20%;
+    display: flex;
+}
+header .profil img{
+    height: 100%;
+}
+header .profil .href{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header .profil .href h4{
+    margin: 5px;
+}
+.content{
+    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: default;
+    padding-top: 30px;
+}
+.content .klassy{
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    font-family: 'OpenSans';
+}
+.content .klassy .klass{
+    background:white;
+    height: 200px;
+    width: 250px;
+    text-align: center;
+    color: #5d5b5b;
+    box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.3);
+    margin: 10px;
+
+}
+.content .klassy .klass ul{
+    padding: 0px;   
+}
+.content .klassy .klass ul li{
+    list-style-type: none;
+    font-family: 'OpenSans';
+}
+.content .klassy .klass ul li a{
+    text-decoration: none;
+    color: #5d5b5b;
+}
+
+
+footer{
+    text-align: center;
+    font-family:  'OpenSans';
+    color: #727272;
+    margin-top: 20px;
+    background: white;
+    height: 60px;
+}
+footer h4{
+    padding-top: 30px;
+    margin: 0px;
+}
+
+
