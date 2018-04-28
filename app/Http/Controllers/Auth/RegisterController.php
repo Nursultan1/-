@@ -49,12 +49,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'fio_teache' => 'required|max:255',
-            'login'=>'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *
@@ -65,13 +63,10 @@ class RegisterController extends Controller
     {
         return User::create([
             'fio_teache' => $data['fio_teache'],
-            'login' => $data['login'],
             'password' => bcrypt($data['password']),
             'email' => $data['email'],
             'id_rol' => '1',
             'name_class' => $data['name_class'],
-            
-            
         ]);
     }
 }

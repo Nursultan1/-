@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'fio_teache','id_rol', 'email', 'password','name_class',
     ];
     //Записи о последних измениях откючен
     public $timestamps = false;

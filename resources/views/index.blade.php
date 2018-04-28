@@ -7,24 +7,6 @@
     <link rel="stylesheet" href="css/modal.css">
 @endsection
 @section('content')
-        <header>
-            <div class="titel">
-                <h1>Электронный журнал</h1>                      
-                <div class="line-blok">
-                    <hr class="line line1" />
-                    <hr class="line line2" />
-                </div>
-                
-            </div>
-            <div class="profil">
-                <img src="img/test.jpg" alt="">
-                <div class="href">
-                    <h4>Фамилия Имя</h4>
-                    <a href="profil.html">Личный кабинет</a>
-                    <a href="">Выйти</a>
-                </div>
-            </div>
-        </header>
         <div class="content">
             <div class="klassy">
             <?php $class=1?>
