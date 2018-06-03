@@ -1,0 +1,428 @@
+$conn = new mysqli("localhost", "root", "123", "vuephpcrud");
+if($conn->connect_error){
+	die("Could not connect to database!");
+}
+
+$res = array('error' => false);
+
+$action = 'read';
+
+if(isset($_GET['action'])){
+	$action = $_GET['action'];
+}
+
+
+if($action == 'read'){
+	$result = $conn->query("SELECT * FROM `users`");
+	$users = array();
+
+	while($row = $result->fetch_assoc()){
+		array_push($users, $row);
+	}
+
+	$res['users'] = $users;
+}
+
+if($action == 'create'){
+
+	$username = $_POST['username'];
+	$email = $_POST['email'];
+	$mobile = $_POST['mobile'];
+
+	$result = $conn->query("INSERT INTO `users` (`username`, `email`, `mobile`) VALUES ('$username', '$email', '$mobile') ");
+	
+	if($result){
+		$res['message'] = "User added successfully";
+	} else{
+		$res['error'] = true;
+		$res['message'] = "Could not insert user";
+	}
+}
+
+if($action == 'update'){
+	$id = $_POST['id'];
+	$username = $_POST['username'];
+	$email = $_POST['email'];
+	$mobile = $_POST['mobile'];
+
+	$result = $conn->query("UPDATE `users` SET `username` = '$username', `email` = '$email', `mobile` = '$mobile' WHERE `id` = '$id'");
+	
+	if($result){
+		$res['message'] = "User updated successfully";
+	} else{
+		$res['error'] = true;
+		$res['message'] = "Could not update user";
+	}
+
+}
+
+if($action == 'delete'){
+	$id = $_POST['id'];
+	
+
+	$result = $conn->query("DELETE FROM `users` WHERE `id` = '$id'");
+	
+	if($result){
+		$res['message'] = "User deleted successfully";
+	} else{
+		$res['error'] = true;
+		$res['message'] = "Could not delete user";
+	}
+
+}
+
+
+$conn->close();
+
+header("Content-type: application/json");
+echo json_encode($res);
+die();
+ 
+
+style.css: 
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.container{
+	width: 960px;
+	margin: auto;
+	margin-top: 44px;
+}
+
+.fleft{
+	float: left;
+}
+
+.fright{
+	float: right;
+}
+
+.clear{
+	clear: both;
+}
+
+h1{
+	font-size: 22px;
+}
+
+.addNew{
+	padding: 2px 9px;
+}
+
+table.list{
+	width: 100%;
+	margin-top: 33px;	
+}
+
+table.list th{
+	background: #1A68B8;
+	color: #FFFFFF;
+	padding: 9px;
+}
+
+table.list td{
+	padding: 9px;
+	text-align: center;
+}
+
+table.list tr{
+	background: #EEEEEE;
+}
+
+
+button{
+	padding: 2px 9px;
+}
+
+
+.modal{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0, 0.4);
+}
+
+.modalContainer{
+	width: 555px;
+	background: #FFFFFF;
+	margin: auto;
+	margin-top: 44px;
+}
+
+.modalHeading{
+	padding: 9px;
+	background: #06307C;
+	color: #FFFFFF;
+}
+
+.modalContent{
+	min-height: 333px;
+	padding: 44px;
+}
+
+.close{
+	background: #D73131;
+	padding: 3px 9px;
+	border: none;
+	color: #FFFFFF;
+}
+
+table.form input, table.form td{
+	padding: 6px;
+}
+
+p.successMessage{
+	background: #D8EFC2;
+	color: #097133;
+	border-left: 5px solid  #097133;
+	padding: 9px;
+	margin: 22px 0;
+}
+
+p.errorMessage{
+	background: #EFCBC2;
+	color: #D71517;
+	border-left: 5px solid  #DA1527;
+	padding: 9px;
+	margin: 22px 0;
+}
+ 
+
+app.js :
+
+var app = new Vue({
+	el: "#root",
+	data: {
+		showingAddModal: false,
+		showingEditModal: false,
+		showingDeleteModal: false,
+		errorMessage: "",
+		successMessage: "",
+		users: [],
+		newUser: {username: "", email: "", mobile: ""},
+		clickedUser: {}
+	},
+
+	mounted: function(){
+		console.log("mounted");
+		this.getAllUsers();
+	},
+
+	methods: {
+		getAllUsers: function(){
+			axios.get("http://localhost/vuephpcrud/api.php?action=read")
+			.then(function(response){
+				if(response.data.error){
+					app.errorMessage = response.data.message; 
+				} else{
+					app.users = response.data.users;
+				}
+			});
+		},
+
+		saveUser: function(){
+			//console.log(app.newUser);
+			var formData = app.toFormData(app.newUser);
+
+			axios.post("http://localhost/vuephpcrud/api.php?action=create", formData)
+			.then(function(response){
+				
+				app.newUser = {username: "", email: "", mobile: ""};
+
+				if(response.data.error){
+					app.errorMessage = response.data.message; 
+				} else{
+					app.getAllUsers();
+				}
+			});
+		},
+
+		updateUser: function(){
+			//console.log(app.newUser);
+			var formData = app.toFormData(app.clickedUser);
+
+			axios.post("http://localhost/vuephpcrud/api.php?action=update", formData)
+			.then(function(response){				
+				app.clickedUser = {};
+				if(response.data.error){
+					app.errorMessage = response.data.message; 
+				} else{
+					app.successMessage = response.data.message; 
+					app.getAllUsers();
+				}
+			});
+		},
+
+		deleteUser: function(){
+			//console.log(app.newUser);
+			var formData = app.toFormData(app.clickedUser);
+
+			axios.post("http://localhost/vuephpcrud/api.php?action=delete", formData)
+			.then(function(response){				
+				app.clickedUser = {};
+				if(response.data.error){
+					app.errorMessage = response.data.message; 
+				} else{
+					app.successMessage = response.data.message; 
+					app.getAllUsers();
+				}
+			});
+		},
+
+		selectUser(user){
+			app.clickedUser = user;
+		},
+
+		toFormData: function(obj){
+			var form_data = new FormData();
+		      for ( var key in obj ) {
+		          form_data.append(key, obj[key]);
+		      } 
+		      return form_data;
+		},
+
+		clearMessage: function(){
+			app.errorMessage = "";
+			app.successMessage = "";
+		}
+	}
+});
+ 
+
+root div: 
+
+<div id="root">
+	<div class="container">
+		<h1 class="fleft">List of users</h1>
+		<button class="fright addNew" @click="showingAddModal = true;">Add New</button>
+		<div class="clear"></div>
+		<hr>
+		<p class="errorMessage" v-if="errorMessage">
+			{{errorMessage}}
+		</p>
+
+		<p class="successMessage" v-if="successMessage">
+			{{successMessage}}
+		</p>
+
+		<table class="list">
+			<tr>
+				<th>ID</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Mobile</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			<tr v-for="user in users">
+				<td>{{user.id}}</td>
+				<td>{{user.username}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.mobile}}</td>
+				<td><button @click="showingEditModal = true; selectUser(user)">Edit</button></td>
+				<td><button @click="showingDeleteModal = true; selectUser(user)">Delete</button></td>
+			</tr>
+		</table>
+
+	</div>
+
+
+	<div class="modal" id="addModal" v-if="showingAddModal">
+		<div class="modalContainer">
+			<div class="modalHeading">
+				<p class="fleft">Add New User</p>
+				<button class="fright close" @click="showingAddModal = false;">x</button>
+				<div class="clear"></div>
+			</div>
+			<div class="modalContent">
+				<table class="form">
+					<tr>
+						<th>Username</th>
+						<th> : </th>
+						<td> <input type="text" name="" v-model="newUser.username"> </td>
+					</tr>
+
+					<tr>
+						<th>Email</th>
+						<th> : </th>
+						<td> <input type="text" name="" v-model="newUser.email"> </td>
+					</tr>
+
+					<tr>
+						<th>Mobile</th>
+						<th> : </th>
+						<td> <input type="text" name="" v-model="newUser.mobile"> </td>
+					</tr>
+
+					<tr>
+						<th></th>
+						<th> </th>
+						<td> <button @click="showingAddModal = false; saveUser();">Save</button> </td>
+					</tr>
+
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="editModal" v-if="showingEditModal">
+		<div class="modalContainer">
+			<div class="modalHeading">
+				<p class="fleft">Edit This User</p>
+				<button class="fright close" @click="showingEditModal = false;">x</button>
+				<div class="clear"></div>
+			</div>
+			<div class="modalContent">
+				<table class="form">
+					<tr>
+						<th>Username</th>
+						<th> : </th>
+						<td> <input type="text" name="" v-model="clickedUser.username"> </td>
+					</tr>
+
+					<tr>
+						<th>Email</th>
+						<th> : </th>
+						<td> <input type="text" name="" v-model="clickedUser.email"> </td>
+					</tr>
+
+					<tr>
+						<th>Mobile</th>
+						<th> : </th>
+						<td> <input type="text" name="" v-model="clickedUser.mobile"> </td>
+					</tr>
+
+					<tr>
+						<th></th>
+						<th> </th>
+						<td> <button @click="showingEditModal = false; updateUser()">Update</button> </td>
+					</tr>
+
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="deleteModal" v-if="showingDeleteModal">
+		<div class="modalContainer">
+			<div class="modalHeading">
+				<p class="fleft">Are you sure?</p>
+				<button class="fright close" @click="showingDeleteModal = false;">x</button>
+				<div class="clear"></div>
+			</div>
+			<div class="modalContent">
+				<p>You are going to delete '{{clickedUser.username}}'.</p>
+				<br><br><br><br><br>
+				<button @click="showingDeleteModal = false; deleteUser()">Yes</button>
+				<button @click="showingDeleteModal = false;">No</button>
+			</div>
+		</div>
+	</div>
+</div>

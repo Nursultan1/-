@@ -1,0 +1,39 @@
+.wrappers-journal{
+    background: white;
+    padding: 0px;
+    display: flex;
+}
+.journal-section{
+    margin: 0px;
+    padding: 0px;
+    height: 500px;
+    overflow-x: auto;
+}
+.journal-section .table tbody tr{
+    height: 39px;
+    table-layout: fixed;
+    color: black;
+    font-size: 14px;
+}
+.journal-section .table tbody tr td{
+    
+}
+
+/* Список учеников */
+.pupil-list {
+    width: 350px;
+    background: rgb(225, 244, 250);
+}
+
+
+
+/* оценки */
+.assesments{
+    width: 850px;
+}
+
+
+/* План */
+.plan{
+    width: 350px;
+}
