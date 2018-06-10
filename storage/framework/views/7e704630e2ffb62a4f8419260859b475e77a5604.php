@@ -1,16 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    <!-- <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in!
-                </div>            
-            </div>
-        </div>
-    </div> -->
+    <Home id="<?php echo e(Auth::user()->id_teache); ?>" fio="<?php echo e(Auth::user()->fio_teache); ?>" email="<?php echo e(Auth::user()->email); ?>"></Home>
 </div>
 <?php $__env->stopSection(); ?>
 

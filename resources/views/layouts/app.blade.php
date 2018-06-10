@@ -34,9 +34,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href=""> Мои предметы </a> </li>
-                        <li><a href="">Мой класс</a> </li>
-                        <li><a href="">Личные данные</a></li>
+                        <li><a href="/ads">Объявления</a></li>
+                        <li><a href="/item"> Мои предметы </a> </li>
+                        <li><a href="/classe">Мой класс</a> </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">

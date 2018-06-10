@@ -95,4 +95,24 @@ class TeacheController extends Controller
         header("Content-type: application/json");
         echo json_encode($res);
     }
+
+    // home
+
+    function ajaxUpdatePassword(Request $request){
+        $res = array(
+            'error' => false,
+            'message'=>''
+        );
+        $current=bcrypt($request->input('current'));
+        $new=bcrypt($request->input('new'));
+        $new2=bcrypt($request->input('new2'));
+        // $teaches=DB::select("select  * fron teaches  where password='$current'");
+        DB::update("update teaches set password='$new' where password='$current' ");
+        // if(!empty($teaches)){
+        //     $id_teache=$teaches[0]->id_teache;
+        //     DB::update("update teaches set password='$new' where id_teache='$id_teache' ");
+        // }
+        header("Content-type: application/json");
+        echo json_encode($res);
+    }
 }

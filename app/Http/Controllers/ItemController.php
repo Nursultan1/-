@@ -8,6 +8,7 @@ use App\Teache;
 use Artisan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -101,5 +102,23 @@ class ItemController extends Controller
         );
         header("Content-type: application/json");
         echo json_encode($result);
+    }
+
+    function readU(){
+        $id_teache=Auth::user()->id_teache;
+        $classes=Classe::all();
+        $data=array();
+        foreach($classes as $classe){
+            $itemTabNAme="class".$classe->class_name_numbe."_".$classe->class_name_categori."_items";
+            $items=DB::select("select * from $itemTabNAme where id_teache='$id_teache'");
+            foreach($items as $item){
+                $data[]=array(
+                    'class'=>$classe->class_name_numbe."_".$classe->class_name_categori."-класс",
+                    'itemName'=>$item->name_predmet_ru
+                );
+            }
+        }
+        return view('item', compact('data'));
+        // dd($data);
     }
 }

@@ -134,4 +134,8 @@ class ClassController extends Controller
         Classe::destroy($id);
         return redirect('admin/');
     }
+
+    function readU(){
+        return view('classe');
+    }
 }

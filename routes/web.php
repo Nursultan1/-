@@ -59,8 +59,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
         // для получения запросов на добвления в преподователи
         Route::get('/teache/ajax-read-request', 'TeacheController@ajaxReadRequest');
         Route::post('/teache/ajax-request-config', 'TeacheController@ajaxRequestConfig');
-
-
+    
+    //объявления 
+    Route::get('/ads', 'AdsController@read')->name('ads');
+    Route::get('/ads/update/{id?}', 'AdsController@update');
+    Route::any('/ads/save/{id?}', 'AdsController@save');
+    Route::get('/ads/delete/{id}', 'AdsController@delete');
+    Route::get('/ads/create', 'AdsController@create');
 });
 
 
@@ -75,4 +80,25 @@ Route::group(['middleware' => 'auth'], function(){
 
     // журнал
     Route::get('/journal/{id_class}/{id_item}','JournalController@index');
+    Route::get('/journal/lessons/ajax/{nameClass}/{id_item}','JournalController@ajaxGetLessons');
+    Route::get('/journal/plan/ajax/{nameClass}/{id_item}','JournalController@ajaxGetPlan');
+    Route::any('/journal/create-lesson/ajax/{nameClass}/{id_item}','JournalController@ajaxCreateLesson');
+    Route::any('/journal/add-assess/ajax/{nameClass}/{id_item}','JournalController@ajaxAddAssess');
+    Route::get('/journal/name-item/ajax/{nameClass}/{id_item}','JournalController@ajaxgetNameItem');
+
+    Route::get('/journal/lessons/{nameClass}/{id_item}','JournalController@test');
+    
+
+    //home
+    Route::post('/home/teache/edit/ajax','TeacheController@ajaxUpdate');
+    Route::post('/home/teache/edit-password/ajax','TeacheController@ajaxUpdatePassword');
+
+    ////объявления 
+    Route::get('/ads','AdsController@readU');
+
+    //Мои предметы
+    Route::get('/item','ItemController@readU');
+
+    //мой класс
+    Route::get('/classe','ClassController@readU');
 });

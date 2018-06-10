@@ -20,6 +20,8 @@ Vue.component('admin-teache', require('./components/admin-teache.vue'));
 Vue.component('admin-pupil', require('./components/admin-pupil.vue'));
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('classes', require('./components/classes.vue'));
+Vue.component('Journal', require('./components/Journal.vue'));
+Vue.component('Home', require('./components/Home.vue'));
 
 
 const app = new Vue({

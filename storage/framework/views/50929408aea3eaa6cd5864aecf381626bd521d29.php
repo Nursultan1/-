@@ -76,9 +76,9 @@
         <div class="container-flued">
             <div class = "col-xs-12 col-md-3">
                 <ul class="nav nav-tabs nav-stacked" style = "background: #333;">
-                <li><a href="<?php echo e(route('admin')); ?>">Классы</a></li>
-                <li><a href="<?php echo e(route('teache')); ?>">Преподователи</a></li>
-                <li><a href="#">Ученики</a></li>
+                    <li><a href="<?php echo e(route('admin')); ?>">Классы</a></li>
+                    <li><a href="<?php echo e(route('teache')); ?>">Преподователи</a></li>
+                    <li><a href="admin/ads">Объявления</a></li>
                 </ul>
             </div>
             <?php echo $__env->yieldContent('content'); ?>

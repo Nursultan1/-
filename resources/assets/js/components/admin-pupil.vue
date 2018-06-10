@@ -113,7 +113,6 @@
             this.getAllPupil();
         },
         methods: {
-
             getAllPupil: function(){
                 axios.get("http://school.kg/admin/pupils/ajax/"+this.className)
                 .then(function(response){

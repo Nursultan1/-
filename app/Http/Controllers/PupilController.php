@@ -35,7 +35,7 @@ class PupilController extends Controller
             'error' => false,
             'message'=>''
         );
-        $pupils = DB::table("class".$className."_pupils")->get();
+        $pupils = DB::select("select * from class".$className."_pupils order by fio_pupil");
         $tmp=array();
         foreach($pupils as $pupil){
             $tmp[]=array(
@@ -47,6 +47,8 @@ class PupilController extends Controller
         header("Content-type: application/json");
         echo json_encode($res);
     }
+
+
     function ajaxSave(Request $request,$className){
         $res = array(
             'error' => false,
@@ -59,6 +61,7 @@ class PupilController extends Controller
         header("Content-type: application/json");
         echo json_encode($res);
     }
+
 
     function ajaxUpdate(Request $request,$className){
         $res = array(
@@ -75,6 +78,8 @@ class PupilController extends Controller
         header("Content-type: application/json");
         echo json_encode($res);
     }
+
+
     function ajaxDelete(Request $request,$className){
         $res = array(
             'error' => false,
